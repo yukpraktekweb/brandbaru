@@ -91,35 +91,6 @@
         .dark ::-webkit-scrollbar-thumb { background: #475569; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
-
-        /* 1. Mobile Icons Colors */
-        .icon-home { color: #3b82f6 !important; }
-        .icon-store { color: #ec4899 !important; }
-        .icon-product { color: #a855f7 !important; }
-        .icon-user { color: #14b8a6 !important; }
-        .icon-profile { color: #f59e0b !important; }
-
-        /* 2. Mobile Nav Glassmorphism Style */
-        #mobile-nav {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
-        }
-        .dark #mobile-nav {
-            background: rgba(15, 23, 42, 0.6);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* 3. Responsive Logic (Hide Sidebar & Main Padding) */
-        @media (max-width: 767px) {
-            aside#sidebar { display: none !important; }
-            main { padding-bottom: 80px !important; }
-        }
-        @media (min-width: 768px) {
-            #mobile-nav { display: none !important; }
-        }
     </style>
 </head>
 <body class="text-slate-800 dark:text-slate-100 antialiased h-screen overflow-hidden flex flex-col transition-colors duration-300">
@@ -245,7 +216,7 @@
     <!-- ==========================================
          AUTH VIEWS (LOGIN, REGISTER, FORGOT PWD)
          ========================================== -->
-    <div id="view-auth" class="flex-1 flex items-center justify-center relative h-screen w-full z-50 p-4 pb-32 overflow-y-auto">
+    <div id="view-auth" class="flex-1 flex items-center justify-center relative h-screen w-full z-50 p-4 overflow-y-auto">
         <div class="w-full max-w-md p-8 glass rounded-3xl shadow-2xl relative z-10 mx-auto border border-white/50 dark:border-slate-700/50 my-auto">
             <div class="text-center mb-8">
                 <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand to-purple-600 shadow-lg shadow-brand/30 text-white mb-5 overflow-hidden" id="authLogoContainer">
@@ -515,7 +486,7 @@
                     <div class="glass border border-blue-200 dark:border-blue-900/50 p-4 rounded-2xl text-sm text-blue-800 dark:text-blue-200 flex items-start sm:items-center gap-3 shadow-sm relative overflow-hidden">
                         <div class="absolute inset-0 bg-blue-500/10 dark:bg-blue-500/20"></div>
                         <i class="ph ph-info text-2xl shrink-0 relative z-10 text-blue-500"></i>
-                        <p class="relative z-10"><strong>iMersFireShip System Active:</strong> Dibangun dengan AppScript & Vercel, bisa jalan tanpa domain & hosting mahal - tes cekout yang ada nilai rupiahnya pake email lain dan aktifkan sendri .</p>
+                        <p class="relative z-10"><strong>iMersFireShip System Active:</strong> Dibangun dengan AppScript & Vercel & Cloudflare, bisa jalan tanpa domain & hosting mahal .</p>
                     </div>
                     <div class="glass rounded-2xl overflow-hidden shadow-xl relative z-10">
                         <div class="overflow-x-auto">
@@ -1360,7 +1331,7 @@
      JAVASCRIPT LOGIC (app.js)
      ========================================== -->
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxnR0oXxnenBc57s9UqoJ-eDscFAIh5WVqxOWNxFEv58c3zXjV962JnEDFE9U4fblpaw/exec"; // GANTI DENGAN URL WEB APP LO
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlrtl3JWzpLK_1tJgKHmI--IvseNa883TPdzFnx90F3aHPkLJPyQcw4y11fljux4TXNg/exec"; // GANTI DENGAN URL WEB APP LO
 
     window.showToast = (m, t = 'success') => {
         const el = document.getElementById('toast');
@@ -2006,7 +1977,6 @@
 
 // --- NAVIGATION & UI LOGIC (FIXED) ---
     window.navigate = (targetId) => {
-        // 1. Logic Sidebar Desktop (Kode Asli Lo)
         document.querySelectorAll('.nav-link').forEach(link => {
             if(link.dataset.target === targetId) {
                 link.classList.add('bg-white/40', 'dark:bg-slate-800/40', 'active');
@@ -2014,17 +1984,6 @@
             } else {
                 link.classList.remove('bg-white/40', 'dark:bg-slate-800/40', 'active');
                 link.classList.add('bg-transparent');
-            }
-        });
-
-        // 2. Logic Mobile Bottom Nav (TAMBAHAN BIAR NYALA)
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            if(link.dataset.target === targetId) {
-                link.classList.add('active');
-                link.style.transform = "scale(1.1)"; // Efek pop-up dikit biar kerasa diklik
-            } else {
-                link.classList.remove('active');
-                link.style.transform = "scale(1)";
             }
         });
 
@@ -2056,12 +2015,13 @@
                 window.renderSystemSettings();
             }
         }
+        // -----------------------------------
 
-        // Auto close mobile menu sidebar jika sedang terbuka
         if(window.innerWidth < 768 && window.appState.isSidebarOpen) {
             window.toggleMobileMenu();
         }
-    
+    };
+
     window.toggleMobileMenu = () => {
         window.appState.isSidebarOpen = !window.appState.isSidebarOpen;
         const sidebar = document.getElementById('sidebar');
@@ -3430,6 +3390,8 @@
             const e = document.getElementById('coEmail').value.trim();
             const w = window.formatPhoneNumber(document.getElementById('coWA').value);
             const p = document.getElementById('coPassword').value;
+            const selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
+            const selectedMethod = selectedRadio ? selectedRadio.value : 'Bank Transfer';
             
             // Hitung ulang untuk pengiriman data ke Google Sheets
             const c = window.appState.currentCheckoutCoupon;
@@ -3460,7 +3422,7 @@
                 discountApplied: d,
                 uniqueCode: unique, 
                 totalPay: t,
-                paymentMethod: 'Bank Transfer',
+                paymentMethod: selectedMethod,
                 status: finalStatus,
                 userPasswordHash: window.appState.user ? window.appState.user.password : await window.hashPassword(p),
                 affiliateRef: localStorage.getItem('affiliateRef') || null
