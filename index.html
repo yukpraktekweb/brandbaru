@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMersFireship - Digital Product Platform</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -96,7 +98,7 @@
 <body class="text-slate-800 dark:text-slate-100 antialiased h-screen overflow-hidden flex flex-col transition-colors duration-300">
 
     <!-- ==========================================
-         CHECKOUT VIEW (PUBLIC)
+         CHECKOUT  (PUBLIC)
          ========================================== -->
     <div id="view-checkout" class="hidden flex-1 overflow-y-auto relative w-full z-50 py-8 px-4">
         <div class="max-w-xl mx-auto space-y-5 pb-24">
@@ -219,16 +221,11 @@
     <div id="view-auth" class="flex-1 flex items-center justify-center relative h-screen w-full z-50 p-4 overflow-y-auto">
         <div class="w-full max-w-md p-8 glass rounded-3xl shadow-2xl relative z-10 mx-auto border border-white/50 dark:border-slate-700/50 my-auto">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg shadow-brand/30 text-white mb-5 overflow-hidden" 
-     id="authLogoContainer"
-     style="background: linear-gradient(135deg, var(--brand-color), var(--secondary-color));">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand to-purple-600 shadow-lg shadow-brand/30 text-white mb-5 overflow-hidden" id="authLogoContainer">
                     <img id="appLogoAuth" src="" alt="Logo" class="w-full h-full object-cover hidden">
                     <i id="appIconAuth" class="ph ph-rocket-launch text-4xl"></i>
                 </div>
-                <h1 class="text-3xl font-black text-transparent bg-clip-text app-name-display"
-    style="background-image: linear-gradient(to right, var(--brand-color), var(--secondary-color));">
-    iMersFireship
-</h1>
+                <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-500 app-name-display">iMersFireship</h1>
                 <p id="authSubtitle" class="text-slate-500 dark:text-slate-400 text-sm mt-2 font-medium">Admin & User Login</p>
             </div>
 
@@ -243,9 +240,7 @@
                     <input type="password" id="loginPassword" placeholder="admin123" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand outline-none transition-all dark:text-white font-medium" required>
                 </div>
                 <div class="pt-2">
-                    <button type="submit" id="loginBtn" 
-        class="w-full text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand/30 transition-all flex items-center justify-center gap-2"
-        style="background: linear-gradient(to right, var(--brand-color), var(--secondary-color));">
+                    <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-brand to-purple-600 hover:from-brandHover hover:to-purple-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand/30 transition-all flex justify-center items-center gap-2 text-lg">
                         <span>Sign In</span>
                         <i class="ph ph-sign-in"></i>
                     </button>
@@ -539,31 +534,58 @@
 
                 <!-- ORDERS VIEW -->
                 <div id="content-orders" class="content-section hidden space-y-6">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-                        <div>
-                            <h3 class="text-2xl font-black text-slate-800 dark:text-white">Order Management</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Verifikasi dan kelola pesanan masuk.</p>
-                        </div>
-                    </div>
-                    <div class="glass rounded-2xl overflow-hidden shadow-xl relative z-10">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                                <thead class="bg-white/40 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 border-b border-white/50 dark:border-slate-700/50">
-                                    <tr>
-                                        <th class="px-6 py-4 font-bold">Order ID</th>
-                                        <th class="px-6 py-4 font-bold">Customer</th>
-                                        <th class="px-6 py-4 font-bold">Product</th>
-                                        <th class="px-6 py-4 font-bold">Total</th>
-                                        <th class="px-6 py-4 font-bold text-center">Status</th>
-                                        <th class="px-6 py-4 font-bold text-right">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="ordersTableBody" class="divide-y divide-white/20 dark:divide-slate-700/50">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div>
+            <h3 class="text-2xl font-black text-slate-800 dark:text-white">Order Management</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Verifikasi dan kelola pesanan masuk.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <div class="relative w-full sm:w-64">
+                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="orderSearchInput" oninput="window.renderOrdersTable()" placeholder="Cari invoice atau pembeli..." class="w-full pl-11 pr-4 py-2.5 bg-white/10 dark:bg-slate-900/50 border border-white/20 rounded-xl outline-none text-sm dark:text-white focus:ring-2 focus:ring-brand transition-all">
+            </div>
+            <select id="orderStatusFilter" onchange="window.renderOrdersTable()" class="bg-white/10 dark:bg-slate-900/50 border border-white/20 rounded-xl px-4 py-2 text-xs font-bold outline-none dark:text-white cursor-pointer">
+                <option value="ALL">SEMUA STATUS</option>
+                <option value="Paid">PAID</option>
+                <option value="Unpaid">UNPAID</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="glass rounded-2xl overflow-hidden shadow-xl relative z-10 border border-white/20">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                <thead class="bg-white/40 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 border-b border-white/50 dark:border-slate-700/50">
+                    <tr>
+                        <th class="px-6 py-4 font-bold">Order ID</th>
+                        <th class="px-6 py-4 font-bold">Customer</th>
+                        <th class="px-6 py-4 font-bold">Product</th>
+                        <th class="px-6 py-4 font-bold">Total</th>
+                        <th class="px-6 py-4 font-bold text-center">Status</th>
+                        <th class="px-6 py-4 font-bold text-right">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody" class="divide-y divide-white/20 dark:divide-slate-700/50">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="p-4 bg-white/20 dark:bg-slate-800/20 border-t border-white/10 flex items-center justify-between">
+            <div id="orderPaginationInfo" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                Showing 0 to 0 of 0 entries
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="btnOrderPrev" class="p-2 rounded-lg bg-white/10 border border-white/20 hover:bg-brand hover:text-white disabled:opacity-20 transition-all cursor-pointer">
+                    <i class="ph-bold ph-caret-left text-xs"></i>
+                </button>
+                <button id="btnOrderNext" class="p-2 rounded-lg bg-white/10 border border-white/20 hover:bg-brand hover:text-white disabled:opacity-20 transition-all cursor-pointer">
+                    <i class="ph-bold ph-caret-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- LICENSE VIEW -->
                 <div id="content-license" class="content-section hidden space-y-6">
@@ -655,34 +677,62 @@
 
                 <!-- USERS DIRECTORY VIEW -->
                 <div id="content-users" class="content-section hidden space-y-6">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-                        <div>
-                            <h3 class="text-2xl font-black text-slate-800 dark:text-white">Users Directory</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Kelola data member, admin, dan agency.</p>
-                        </div>
-                        <button onclick="openUserModal()" id="btnAddUser" class="shrink-0 relative z-20 cursor-pointer bg-gradient-to-r from-brand to-purple-600 hover:from-brandHover hover:to-purple-700 shadow-lg shadow-brand/30 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
-                            <i class="ph ph-user-plus text-xl"></i> Tambah User
-                        </button>
-                    </div>
-                    <div class="glass rounded-2xl overflow-hidden shadow-xl relative z-10">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                                <thead class="bg-white/40 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 border-b border-white/50 dark:border-slate-700/50">
-                                    <tr>
-                                        <th class="px-6 py-4 font-bold">Nama & Email</th>
-                                        <th class="px-6 py-4 font-bold">WhatsApp</th>
-                                        <th class="px-6 py-4 font-bold">Info Rekening</th>
-                                        <th class="px-6 py-4 font-bold text-center">Role</th>
-                                        <th class="px-6 py-4 font-bold">Kode Affiliate</th>
-                                        <th class="px-6 py-4 font-bold text-right">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="usersTableBody" class="divide-y divide-white/20 dark:divide-slate-700/50">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div>
+            <h3 class="text-2xl font-black text-slate-800 dark:text-white">Users Directory</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Kelola data member, admin, dan agency.</p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <div class="relative w-full sm:w-64">
+                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="userSearchInput" oninput="window.renderUsersTable()" placeholder="Cari nama atau email..." class="w-full pl-11 pr-4 py-2.5 bg-white/10 dark:bg-slate-900/50 border border-white/20 rounded-xl outline-none text-sm dark:text-white focus:ring-2 focus:ring-brand transition-all">
+            </div>
+            <select id="userRoleFilter" onchange="window.renderUsersTable()" class="bg-white/10 dark:bg-slate-900/50 border border-white/20 rounded-xl px-4 py-2 text-xs font-bold outline-none dark:text-white cursor-pointer">
+                <option value="ALL">SEMUA ROLE</option>
+                <option value="admin">ADMIN</option>
+                <option value="agency">AGENCY</option>
+                <option value="user">USER</option>
+            </select>
+            <button onclick="openUserModal()" id="btnAddUser" class="shrink-0 relative z-20 cursor-pointer bg-gradient-to-r from-brand to-purple-600 hover:from-brandHover hover:to-purple-700 shadow-lg shadow-brand/30 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
+                <i class="ph ph-user-plus text-xl"></i> Tambah User
+            </button>
+        </div>
+    </div>
+
+    <div class="glass rounded-2xl overflow-hidden shadow-xl relative z-10 border border-white/20">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                <thead class="bg-white/40 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 border-b border-white/50 dark:border-slate-700/50">
+                    <tr>
+                        <th class="px-6 py-4 font-bold">Nama & Email</th>
+                        <th class="px-6 py-4 font-bold">WhatsApp</th>
+                        <th class="px-6 py-4 font-bold">Info Rekening</th>
+                        <th class="px-6 py-4 font-bold text-center">Role</th>
+                        <th class="px-6 py-4 font-bold">Kode Affiliate</th>
+                        <th class="px-6 py-4 font-bold text-right">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody" class="divide-y divide-white/20 dark:divide-slate-700/50">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="p-4 bg-white/20 dark:bg-slate-800/20 border-t border-white/10 flex items-center justify-between">
+            <div id="userPaginationInfo" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                Showing 0 to 0 of 0 entries
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="btnUserPrev" class="p-2 rounded-lg bg-white/10 border border-white/20 hover:bg-brand hover:text-white disabled:opacity-20 transition-all cursor-pointer">
+                    <i class="ph-bold ph-caret-left text-xs"></i>
+                </button>
+                <button id="btnUserNext" class="p-2 rounded-lg bg-white/10 border border-white/20 hover:bg-brand hover:text-white disabled:opacity-20 transition-all cursor-pointer">
+                    <i class="ph-bold ph-caret-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- AFFILIATE SYSTEM VIEW -->
                 <div id="content-affiliate" class="content-section hidden space-y-6">
@@ -846,14 +896,12 @@
                         <option value="TAMBAH">TAMBAH</option>
                         <option value="KURANG">KURANG</option>
                     </select>
-                    <p class="text-[10px] text-slate-500 mt-2 ml-1">Digunakan untuk membedakan nominal pembayaran kustomer.</p>
                 </div>
                 <div class="p-5 bg-white/30 dark:bg-slate-800/30 rounded-2xl border border-white/40 dark:border-slate-700/50">
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                         <i class="ph ph-arrows-out text-brand"></i> Maksimal Angka Unik
                     </label>
                     <input type="number" id="sysUniqueMax" placeholder="500" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-brand dark:text-white">
-                    <p class="text-[10px] text-slate-500 mt-2 ml-1">Batas angka acak (misal: 1 - 500).</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -865,19 +913,74 @@
                         <option value="TRUE">LOCKED</option>
                         <option value="FALSE">UNLOCKED</option>
                     </select>
-                    <p class="text-[10px] text-slate-500 mt-2 ml-1">Aktif/nonaktifkan sistem komisi serta cookies referal.</p>
                 </div>
                 <div class="p-5 bg-white/30 dark:bg-slate-800/30 rounded-2xl border border-white/40 dark:border-slate-700/50">
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                         <i class="ph ph-clock-countdown text-brand"></i> Cookie Expiry (Hari)
                     </label>
                     <input type="number" id="sysCookieDays" placeholder="30" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-brand dark:text-white">
-                    <p class="text-[10px] text-slate-500 mt-2 ml-1">Lama link affiliate nempel di browser kustomer.</p>
                 </div>
             </div>
-            <div class="pt-4">
-                <button onclick="window.saveSystemSettings()" id="btnSaveSys" class="bg-gradient-to-r from-brand to-purple-600 hover:from-brandHover hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-black transition-all shadow-xl shadow-brand/30 w-full sm:w-auto">SIMPAN KONFIGURASI SISTEM</button>
+        </div>
+    </div>
+
+    <div class="glass rounded-3xl shadow-xl p-8 border border-white/40 dark:border-slate-700/50">
+        <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 border-b border-white/40 dark:border-slate-700/50 pb-4">Email Integration Control</h3>
+        <div class="space-y-6">
+            <div class="p-5 bg-white/30 dark:bg-slate-800/30 rounded-2xl border border-white/40 dark:border-slate-700/50">
+                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Pilih Provider Email</label>
+                <select id="sysEmailProvider" onchange="window.toggleEmailForms()" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand outline-none transition-all dark:text-white">
+                    <option value="NONE">-- Tidak Ada Sinkronisasi --</option>
+                    <option value="KIRIMEMAIL">Kirim.Email API</option>
+                    <option value="MAILKETING">Mailketing API</option>
+                    <option value="JOWMAIL">Jowmail API</option>
+                </select>
             </div>
+
+            <div id="form-KIRIMEMAIL" class="email-config-form hidden space-y-4">
+                <input type="text" id="KIRIMEMAIL_AUTH_ID" placeholder="Username Kirim.Email" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="KIRIMEMAIL_AUTH_TOKEN" placeholder="REST API Token" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="KIRIMEMAIL_LIST_ID" placeholder="List ID" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="KIRIMEMAIL_SENDER" placeholder="Email Pengirim Verified" class="w-full px-4 py-3 border border-brand/50 rounded-xl font-bold">
+            </div>
+
+            <div id="form-MAILKETING" class="email-config-form hidden space-y-4">
+                <input type="text" id="MAILKETING_TOKEN" placeholder="Mailketing API Token" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="MAILKETING_FROM_EMAIL" placeholder="Sender Email" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="MAILKETING_FROM_NAME" placeholder="Sender Name" class="w-full px-4 py-3 border rounded-xl font-bold">
+            </div>
+
+            <div id="form-JOWMAIL" class="email-config-form hidden space-y-4">
+                <input type="text" id="JOWMAIL_TOKEN" placeholder="Jowmail API Token" class="w-full px-4 py-3 border rounded-xl font-bold">
+                <input type="text" id="JOWMAIL_LIST_ID" placeholder="List ID Jowmail" class="w-full px-4 py-3 border rounded-xl font-bold">
+            </div>
+
+            <div class="py-2">
+                <button type="button" onclick="window.testEmailConfig()" class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 rounded-xl text-xs font-bold border border-slate-200">
+                    <i class="ph ph-paper-plane-tilt"></i> Jalankan Tes Email
+                </button>
+            </div>
+
+            <div class="pt-6 border-t border-white/40 dark:border-slate-700/50 space-y-4">
+                <label class="block text-sm font-black text-slate-800 dark:text-white"><i class="ph ph-qr-code"></i> Checkout & Payment Settings</label>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase px-2">Link Gambar QRIS</label>
+                    <input type="text" id="sysQrisUrl" placeholder="https://link-gambar-qris.png" class="w-full px-4 py-3 bg-white/50 border rounded-xl font-bold">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-slate-400 uppercase px-2">Teks Tombol Redirect</label>
+                        <input type="text" id="sysAfterBtnText" placeholder="Contoh: Terima Kasih" class="w-full px-4 py-3 bg-white/50 border rounded-xl font-bold">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-slate-400 uppercase px-2">URL Link Redirect</label>
+                        <input type="text" id="sysAfterBtnUrl" placeholder="https://domain.com/thanks" class="w-full px-4 py-3 bg-white/50 border rounded-xl font-bold">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-6">
+            <button onclick="window.saveSystemSettings()" id="btnSaveSys" class="bg-gradient-to-r from-brand to-purple-600 text-white px-8 py-4 rounded-2xl font-black shadow-xl w-full sm:w-auto">SIMPAN KONFIGURASI SISTEM</button>
         </div>
     </div>
 </div>
@@ -1646,8 +1749,35 @@
         const userRoleDisplayEl = document.getElementById('userRoleDisplay');
         if (userRoleDisplayEl) userRoleDisplayEl.innerText = user.role;
         
+        // --- TUNING MULTI-LICENSE PREMIUM (BARIS 1642-1644) ---
         const userLicenseCodeEl = document.getElementById('userLicenseCode');
-        if (userLicenseCodeEl) userLicenseCodeEl.innerText = user.license || 'TIDAK-ADA-LISENSI';
+        if (userLicenseCodeEl) {
+            const rawLicense = user.license || '';
+            if (!rawLicense || rawLicense === 'TIDAK-ADA-LISENSI') {
+                userLicenseCodeEl.innerText = 'TIDAK-ADA-LISENSI';
+            } else {
+                const licenseArray = rawLicense.split(',').map(item => item.trim());
+                
+                // Render dengan font Montserrat dan Spacing yang lega
+                userLicenseCodeEl.innerHTML = licenseArray.map(code => `
+                    <div class="flex items-center justify-between bg-white dark:bg-slate-800/40 p-4 rounded-2xl mb-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1" style="font-family: 'Montserrat', sans-serif;">License Key</span>
+                            <span class="font-mono text-brand dark:text-brandHover font-bold text-sm sm:text-base tracking-wider">${code}</span>
+                        </div>
+                        <button onclick="navigator.clipboard.writeText('${code}'); alert('Lisensi Disalin!')" 
+                                class="bg-brand hover:bg-brandHover text-white text-[11px] font-bold px-5 py-2.5 rounded-xl transition-all active:scale-95 shadow-sm flex items-center gap-2"
+                                style="font-family: 'Montserrat', sans-serif;">
+                            <i class="ph ph-copy"></i> Salin
+                        </button>
+                    </div>
+                `).join('');
+                
+                // Sembunyikan tombol salin bawaan yang lama
+                const originalCopyBtn = userLicenseCodeEl.nextElementSibling;
+                if (originalCopyBtn && originalCopyBtn.tagName === 'BUTTON') originalCopyBtn.style.display = 'none';
+            }
+        }
         
         if (user.role === 'user') {
             document.querySelectorAll('[data-target="products"], [data-target="orders"], [data-target="coupons"], [data-target="users"], [data-target="broadcast"], [data-target="templates"], [data-target="settings"], [data-target="system-settings"]').forEach(el => el.classList.add('hidden'));
@@ -1783,6 +1913,7 @@
        
         if(set.appName) {
             document.querySelectorAll('.app-name-display').forEach(el => el.innerText = set.appName);
+            document.title = set.appName + " - Digital Product Platform";
         }
         window.applyLogo(set.logoUrl);
         
@@ -2423,64 +2554,111 @@
         }
     };
 
+       
     // ==========================================
-    // USERS CRUD LOGIC
+    // USERS CRUD LOGIC (SEARCH & PAGINATION)
     // ==========================================
     
     window.renderUsersTable = () => {
         const tbody = document.getElementById('usersTableBody');
-        if(!tbody) return;
+        if (!tbody) return;
         tbody.innerHTML = '';
 
-        if(window.appState.usersData.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500 font-bold">Belum ada user.</td></tr>`;
-            return;
+        // --- 1. AMBIL DATA & FILTER (Gaya Lo) ---
+        const searchQuery = (document.getElementById('userSearchInput')?.value || '').toLowerCase();
+        const roleFilter = (document.getElementById('userRoleFilter')?.value || 'ALL').toLowerCase();
+        const users = window.appState.usersData || [];
+
+        let filteredUsers = users.filter(u => {
+            if (!u) return false;
+            const name = (u.name || '').toLowerCase();
+            const email = (u.email || '').toLowerCase();
+            const role = (u.role || '').toLowerCase();
+            
+            const matchText = name.includes(searchQuery) || email.includes(searchQuery);
+            const matchRole = roleFilter === 'all' || role === roleFilter;
+            
+            return matchText && matchRole;
+        });
+
+        // --- 2. LOGIKA PAGINATION ---
+        const limit = 10;
+        if (!window.appState.userPage) window.appState.userPage = 1;
+        
+        const totalData = filteredUsers.length;
+        const totalPages = Math.ceil(totalData / limit) || 1;
+
+        // Reset ke page 1 kalau posisi page sekarang melampaui total data hasil search
+        if (window.appState.userPage > totalPages) window.appState.userPage = 1;
+
+        const start = (window.appState.userPage - 1) * limit;
+        const pagedUsers = filteredUsers.slice(start, start + limit);
+
+        // --- 3. RENDER TABEL (Full Gaya Lo) ---
+        if (pagedUsers.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500 font-bold italic text-xs">User tidak ditemukan...</td></tr>`;
+        } else {
+            pagedUsers.forEach(u => {
+                const roleColors = {
+                    admin: 'bg-purple-500/20 text-purple-700 dark:text-purple-400',
+                    agency: 'bg-blue-500/20 text-blue-700 dark:text-blue-400',
+                    user: 'bg-slate-500/20 text-slate-700 dark:text-slate-400'
+                };
+                const roleClass = roleColors[u.role] || roleColors['user'];
+
+                let bankInfo = '<span class="text-slate-400 italic text-[10px]">Belum diatur</span>';
+                if (u.bankName || u.bankNo) {
+                    bankInfo = `<div class="bg-brand/5 p-2 rounded-lg border border-brand/10 text-[10px]">
+                        <p class="font-black text-brand uppercase">${u.bankName || '???'}</p>
+                        <p class="font-mono font-bold text-slate-700 dark:text-white">${u.bankNo || '???'}</p>
+                        <p class="text-slate-500 italic opacity-60 text-[9px]">a.n ${u.bankOwner || '???'}</p>
+                    </div>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-white/30 dark:hover:bg-slate-800/30 transition-colors border-b border-white/10 dark:border-slate-700/30">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-800 dark:text-white text-base leading-tight">${u.name}</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">${u.email}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-1 text-xs font-bold text-brand bg-brand/5 px-2 py-1 rounded-lg w-max border border-brand/10">
+                                <i class="ph ph-whatsapp-logo text-green-500 text-sm"></i> ${u.wa || '-'}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">${bankInfo}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="${roleClass} px-3 py-1 rounded-lg text-xs font-black uppercase">${u.role}</span>
+                        </td>
+                        <td class="px-6 py-4 font-mono text-xs text-brand font-bold">${u.affiliateCode || u.license || '-'}</td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex items-center justify-end gap-2">
+                                <button onclick="window.editUser('${u.id}')" class="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 rounded-xl transition-colors" title="Edit"><i class="ph ph-pencil-simple text-xl"></i></button>
+                                <button onclick="window.deleteUser('${u.id}')" class="p-2 text-red-600 dark:text-red-400 hover:bg-red-500/20 rounded-xl transition-colors" title="Delete"><i class="ph ph-trash text-xl"></i></button>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
         }
 
-        window.appState.usersData.forEach(u => {
-            const roleColors = {
-                admin: 'bg-purple-500/20 text-purple-700 dark:text-purple-400',
-                agency: 'bg-blue-500/20 text-blue-700 dark:text-blue-400',
-                user: 'bg-slate-500/20 text-slate-700 dark:text-slate-400'
-            };
-            const roleClass = roleColors[u.role] || roleColors['user'];
+        // --- 4. UPDATE FOOTER PAGINATION (Navigasi Sesuai ID HTML) ---
+        const info = document.getElementById('userPaginationInfo');
+        if (info) info.innerHTML = `Showing <b>${totalData > 0 ? start + 1 : 0}</b> to <b>${Math.min(start + limit, totalData)}</b> of <b>${totalData}</b> entries`;
 
-            let bankInfo = '<span class="text-slate-400 italic text-[10px]">Belum diatur</span>';
-            if(u.bankName || u.bankNo) {
-                bankInfo = `<div class="bg-brand/5 p-2 rounded-lg border border-brand/10 text-[10px]">
-                    <p class="font-black text-brand uppercase">${u.bankName || '???'}</p>
-                    <p class="font-mono font-bold text-slate-700 dark:text-white">${u.bankNo || '???'}</p>
-                    <p class="text-slate-500 italic opacity-60">a.n ${u.bankOwner || '???'}</p>
-                </div>`;
-            }
-
-            tbody.innerHTML += `
-                <tr class="hover:bg-white/30 dark:hover:bg-slate-800/30 transition-colors border-b border-white/10 dark:border-slate-700/30">
-                    <td class="px-6 py-4">
-                        <p class="font-bold text-slate-800 dark:text-white text-base leading-tight">${u.name}</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">${u.email}</p>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-1 text-xs font-bold text-brand bg-brand/5 px-2 py-1 rounded-lg w-max border border-brand/10">
-                            <i class="ph ph-whatsapp-logo text-green-500 text-sm"></i> ${u.wa || '-'}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">${bankInfo}</td>
-                    <td class="px-6 py-4 text-center">
-                        <span class="${roleClass} px-3 py-1 rounded-lg text-xs font-black uppercase">${u.role}</span>
-                    </td>
-                    <td class="px-6 py-4 font-mono text-xs text-brand font-bold">${u.affiliateCode || u.license || '-'}</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button onclick="window.editUser('${u.id}')" class="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 rounded-xl transition-colors" title="Edit"><i class="ph ph-pencil-simple text-xl"></i></button>
-                            <button onclick="window.deleteUser('${u.id}')" class="p-2 text-red-600 dark:text-red-400 hover:bg-red-500/20 rounded-xl transition-colors" title="Delete"><i class="ph ph-trash text-xl"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        });
+        const btnPrev = document.getElementById('btnUserPrev');
+        const btnNext = document.getElementById('btnUserNext');
+        
+        if (btnPrev) { 
+            btnPrev.disabled = (window.appState.userPage <= 1); 
+            btnPrev.style.opacity = btnPrev.disabled ? "0.3" : "1";
+            btnPrev.onclick = () => { window.appState.userPage--; window.renderUsersTable(); };
+        }
+        if (btnNext) { 
+            btnNext.disabled = (window.appState.userPage >= totalPages); 
+            btnNext.style.opacity = btnNext.disabled ? "0.3" : "1";
+            btnNext.onclick = () => { window.appState.userPage++; window.renderUsersTable(); };
+        }
     };
-
     window.openUserModal = () => {
         try {
             const form = document.getElementById('userForm');
@@ -3383,7 +3561,7 @@
         } 
     };
 
-    window.submitCheckout = async () => {
+     window.submitCheckout = async () => {
         const btn = document.getElementById('btnSubmitCheckout');
         if (!btn) return;
 
@@ -3435,11 +3613,15 @@
                 affiliateRef: localStorage.getItem('affiliateRef') || null
             });
 
-            // 2. TAMPILAN INSTRUKSI PEMBAYARAN
+            // 2. TAMPILAN INSTRUKSI PEMBAYARAN (DENGAN DATA DINAMIS QRIS & REDIRECT)
             const successView = document.getElementById('view-checkout');
+            const sysConfig = window.appState.systemSettings || {};
+            const qrisUrl = sysConfig.QRIS_IMAGE_URL || '';
+            const afterBtnText = sysConfig.AFTER_CHECKOUT_BTN_TEXT || 'Login Sekarang';
+            const afterBtnUrl = sysConfig.AFTER_CHECKOUT_BTN_URL || '/';
             
             if (t <= 0) {
-                // Tampilan Gratis (Langsung Login)
+                // Tampilan Gratis
                 successView.innerHTML = `
                     <div class="max-w-md mx-auto py-20 px-6 text-center animate-in fade-in duration-500">
                         <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/20">
@@ -3447,10 +3629,10 @@
                         </div>
                         <h2 class="text-3xl font-black mb-4">Akses Aktif!</h2>
                         <p class="text-slate-500 mb-8">Produk gratis Anda sudah bisa diakses. Silakan login untuk memulai.</p>
-                        <button onclick="window.location.href='/'" class="w-full py-4 bg-brand text-white rounded-2xl font-black shadow-xl shadow-brand/30">Login Sekarang</button>
+                        <button onclick="window.location.href='${afterBtnUrl}'" class="w-full py-4 bg-brand text-white rounded-2xl font-black shadow-xl shadow-brand/30">${afterBtnText}</button>
                     </div>`;
             } else {
-                // TAMPILAN BERBAYAR (INSTRUKSI TRANSFER)
+                // TAMPILAN BERBAYAR
                 const banks = window.appState.settings.banks || [];
                 let bankListHtml = banks.map(b => `
                     <div class="bg-white/60 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 mb-3 text-left">
@@ -3475,6 +3657,13 @@
                         <div class="glass p-6 rounded-[2.5rem] border border-white/50 dark:border-slate-800 shadow-2xl relative overflow-hidden text-left mb-8">
                             <div class="absolute -right-10 -top-10 w-32 h-32 bg-brand/10 rounded-full blur-3xl"></div>
                             <div class="relative z-10">
+                                ${qrisUrl ? `
+                                <div class="mb-6 p-4 bg-white rounded-2xl shadow-inner text-center">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Scan QRIS Untuk Bayar</p>
+                                    <img src="${qrisUrl}" class="w-full h-auto mx-auto max-w-[250px]" alt="QRIS">
+                                    <a href="${qrisUrl}" target="_blank" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-[10px] font-bold transition-all border border-slate-200 no-underline"><i class="ph ph-download-simple"></i> Simpan QRIS</a>
+                                </div>` : ''}
+
                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center mb-1">Total Transfer</p>
                                 <div class="text-3xl font-black text-brand text-center mb-1 flex items-center justify-center gap-2">
                                     <span>${window.formatRp(t)}</span>
@@ -3485,19 +3674,17 @@
                                 <p class="text-center text-[10px] font-bold text-amber-600 uppercase mb-6">*Termasuk Kode Unik: ${unique}</p>
 
                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center mb-3">Rekening Pembayaran:</p>
-                                ${bankListHtml || '<p class="text-center text-xs text-slate-400 italic">Data bank belum diatur di admin.</p>'}
+                                ${bankListHtml || '<p class="text-center text-xs text-slate-400 italic">Data bank belum diatur.</p>'}
                                 
                                 <div class="mt-6 p-4 bg-brand/5 dark:bg-brand/10 rounded-2xl border border-brand/10 text-center">
                                     <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                                        <strong>PENTING:</strong> Transfer <strong>SAMA PERSIS</strong> sampai digit terakhir (<strong>${String(t).slice(-3)}</strong>) untuk verifikasi otomatis.
+                                        <strong>PENTING:</strong> Transfer <strong>SAMA PERSIS</strong> sampai digit terakhir untuk verifikasi otomatis.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <button onclick="window.location.href='/'" class="w-full py-4 bg-brand text-white rounded-2xl font-black shadow-xl shadow-brand/30 transition-all mb-4">
-                            Ke Dashboard
-                        </button>
+                        <button onclick="window.location.href='${afterBtnUrl}'" class="w-full py-4 bg-brand text-white rounded-2xl font-black shadow-xl shadow-brand/30 mb-4">${afterBtnText}</button>
                         <p class="text-xs text-slate-400 italic font-medium text-center">Instruksi ini juga sudah kami kirim ke WhatsApp Anda.</p>
                     </div>`;
             }
@@ -3510,15 +3697,88 @@
         }
     };
 
+    // ==========================================
+    // ORDERS CRUD LOGIC (SEARCH & PAGINATION)
+    // ==========================================
+    
     window.renderOrdersTable = () => { 
-        const tb=document.getElementById('ordersTableBody'); 
-        if(!tb) return; 
-        tb.innerHTML=''; 
-        window.appState.orders.forEach(o=>{ 
-            const b=o.status==='Paid'?`<span class="text-green-500 font-bold">Paid</span>`:`<span class="text-yellow-500 font-bold">Pending</span>`; 
-            const a=o.status==='Paid'?`<button disabled class="text-slate-400">Aktif</button>`:`<button onclick="window.approveOrder('${o.id}')" class="bg-brand text-white px-2 py-1 rounded text-xs">Approve</button>`; 
-            tb.innerHTML+=`<tr class="border-b border-white/10"><td class="px-6 py-4 font-mono text-xs dark:text-white">#${String(o.id).substring(0,6)}</td><td class="px-6 py-4"><p class="font-bold dark:text-white">${o.customerName}</p><p class="text-xs">${o.paymentMethod}</p></td><td class="px-6 py-4 dark:text-white text-xs">${o.productTitle}</td><td class="px-6 py-4 dark:text-white font-bold">${window.formatRp(o.totalPay||o.basePrice)}</td><td class="px-6 py-4">${b}</td><td class="px-6 py-4 text-right">${a}</td></tr>`; 
-        }); 
+        const tb = document.getElementById('ordersTableBody'); 
+        if (!tb) return; 
+        tb.innerHTML = ''; 
+
+        // --- 1. AMBIL DATA & FILTER (Gaya Lo) ---
+        const searchQuery = (document.getElementById('orderSearchInput')?.value || '').toLowerCase();
+        const statusFilter = document.getElementById('orderStatusFilter')?.value || 'ALL';
+        const orders = window.appState.orders || [];
+
+        let filteredOrders = orders.filter(o => {
+            if (!o) return false;
+            const customer = (o.customerName || '').toLowerCase();
+            const invoice = (String(o.id) || '').toLowerCase();
+            
+            const matchText = customer.includes(searchQuery) || invoice.includes(searchQuery);
+            const matchStatus = statusFilter === 'ALL' || o.status === statusFilter;
+            
+            return matchText && matchStatus;
+        });
+
+        // --- 2. LOGIKA PAGINATION ---
+        const limit = 10;
+        if (!window.appState.orderPage) window.appState.orderPage = 1;
+        
+        const totalData = filteredOrders.length;
+        const totalPages = Math.ceil(totalData / limit) || 1;
+
+        if (window.appState.orderPage > totalPages) window.appState.orderPage = 1;
+
+        const start = (window.appState.orderPage - 1) * limit;
+        const pagedOrders = filteredOrders.slice(start, start + limit);
+
+        // --- 3. RENDER TABEL (Gaya Lo + Proteksi) ---
+        if (pagedOrders.length === 0) {
+            tb.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500 font-bold italic text-xs">Order tidak ditemukan...</td></tr>`;
+        } else {
+            pagedOrders.forEach(o => { 
+                const b = o.status === 'Paid' 
+                    ? `<span class="bg-green-500/20 text-green-600 px-2 py-1 rounded text-[10px] font-black uppercase">Paid</span>` 
+                    : `<span class="bg-orange-500/20 text-orange-600 px-2 py-1 rounded text-[10px] font-black uppercase">Pending</span>`; 
+                
+                const a = o.status === 'Paid' 
+                    ? `<button disabled class="text-slate-400 text-xs font-bold opacity-50 cursor-not-allowed">SUDAH AKTIF</button>` 
+                    : `<button onclick="window.approveOrder('${o.id}')" class="bg-brand text-white px-3 py-1.5 rounded-xl text-[10px] font-black shadow-md shadow-brand/20 transition-all active:scale-95 uppercase">Approve</button>`; 
+                
+                tb.innerHTML += `
+                    <tr class="hover:bg-white/30 dark:hover:bg-slate-800/30 transition-colors border-b border-white/10 dark:border-slate-700/30">
+                        <td class="px-6 py-4 font-mono text-[10px] font-bold dark:text-white">#${String(o.id).substring(0,6).toUpperCase()}</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-sm text-slate-800 dark:text-white leading-tight">${o.customerName}</p>
+                            <p class="text-[10px] text-slate-500 font-medium">${o.paymentMethod || 'Manual Transfer'}</p>
+                        </td>
+                        <td class="px-6 py-4 dark:text-white text-[10px] font-medium">${o.productTitle}</td>
+                        <td class="px-6 py-4 dark:text-white font-black text-sm">${window.formatRp(o.totalPay || o.basePrice)}</td>
+                        <td class="px-6 py-4 text-center">${b}</td>
+                        <td class="px-6 py-4 text-right">${a}</td>
+                    </tr>`; 
+            });
+        }
+
+        // --- 4. UPDATE FOOTER PAGINATION ---
+        const info = document.getElementById('orderPaginationInfo');
+        if (info) info.innerHTML = `Showing <b>${totalData > 0 ? start + 1 : 0}</b> to <b>${Math.min(start + limit, totalData)}</b> of <b>${totalData}</b> entries`;
+
+        const btnPrev = document.getElementById('btnOrderPrev');
+        const btnNext = document.getElementById('btnOrderNext');
+        
+        if (btnPrev) { 
+            btnPrev.disabled = (window.appState.orderPage <= 1); 
+            btnPrev.style.opacity = btnPrev.disabled ? "0.3" : "1";
+            btnPrev.onclick = () => { window.appState.orderPage--; window.renderOrdersTable(); };
+        }
+        if (btnNext) { 
+            btnNext.disabled = (window.appState.orderPage >= totalPages); 
+            btnNext.style.opacity = btnNext.disabled ? "0.3" : "1";
+            btnNext.onclick = () => { window.appState.orderPage++; window.renderOrdersTable(); };
+        }
     };
 
     window.approveOrder = async (id) => { 
@@ -3593,69 +3853,178 @@
     // --- LOGIKA BARU: SYSTEM SETTINGS (KONTROL PANEL) ---
     window.renderSystemSettings = () => {
     try {
-        // Ambil data dari state. Jika kosong, gunakan default agar tidak crash.
         const config = window.appState.systemSettings || {};
         
-        console.log("Rendering System Settings with data:", config); // Cek di console F12
-
+        // --- PERBAIKAN: Masukkan SEMUA ID input ke sini supaya keisi otomatis ---
         const elements = {
             'sysUniqueMode': config.KODE_UNIK_MODE || 'TAMBAH',
             'sysUniqueMax': config.KODE_UNIK_MAX || '500',
             'sysAffLock': config.AFFILIATE_LOCK || 'TRUE',
-            'sysCookieDays': config.AFFILIATE_COOKIE_DURATION || '30'
+            'sysCookieDays': config.AFFILIATE_COOKIE_DURATION || '30',
+            'sysEmailProvider': config.emailProvider || 'NONE',
+            'MAILKETING_TOKEN': config.MAILKETING_TOKEN || '',
+            'MAILKETING_FROM_EMAIL': config.MAILKETING_FROM_EMAIL || '',
+            'MAILKETING_FROM_NAME': config.MAILKETING_FROM_NAME || '',
+            'JOWMAIL_TOKEN': config.JOWMAIL_TOKEN || '',
+            'JOWMAIL_LIST_ID': config.JOWMAIL_LIST_ID || '',
+            'KIRIMEMAIL_AUTH_ID': config.KIRIMEMAIL_AUTH_ID || '',
+            'KIRIMEMAIL_AUTH_TOKEN': config.KIRIMEMAIL_AUTH_TOKEN || '',
+            'KIRIMEMAIL_LIST_ID': config.KIRIMEMAIL_LIST_ID || '',
+            'KIRIMEMAIL_SENDER': config.KIRIMEMAIL_SENDER || '',
+            'SMTP_HOST': config.SMTP_HOST || '',
+            'SMTP_PORT': config.SMTP_PORT || '',
+            'SMTP_USER': config.SMTP_USER || '',
+            'SMTP_PASS': config.SMTP_PASS || '',
+            'sysQrisUrl': config.QRIS_IMAGE_URL || '',
+            'sysAfterBtnText': config.AFTER_CHECKOUT_BTN_TEXT || '',
+            'sysAfterBtnUrl': config.AFTER_CHECKOUT_BTN_URL || ''
         };
 
-        // Looping untuk isi data ke input secara aman
         for (const [id, value] of Object.entries(elements)) {
             const el = document.getElementById(id);
             if (el) {
                 el.value = value;
-            } else {
-                console.warn(`Elemen dengan ID ${id} tidak ditemukan di HTML!`);
             }
         }
+
+        // --- INI PEMICUNYA BIAR DROPDOWN LANGSUNG MUNCULIN FORM ---
+        if (typeof window.toggleEmailForms === 'function') {
+            window.toggleEmailForms();
+        }
+
     } catch (error) {
         console.error("Gagal render System Settings:", error);
     }
 };
-    window.saveSystemSettings = async () => {
-    const btn = document.getElementById('btnSaveSys'); 
-    if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<i class="ph ph-circle-notch animate-spin"></i> Saving...';
-    }
+    // --- FUNGSI UNTUK MUNCULIN FORM SESUAI PILIHAN ---
+window.toggleEmailForms = () => {
+    const providerSelect = document.getElementById('sysEmailProvider');
+    if (!providerSelect) return;
 
-    const payload = {
-        KODE_UNIK_MODE: document.getElementById('sysUniqueMode').value,
-        KODE_UNIK_MAX: document.getElementById('sysUniqueMax').value,
-        AFFILIATE_LOCK: document.getElementById('sysAffLock').value,
-        AFFILIATE_COOKIE_DURATION: document.getElementById('sysCookieDays').value
-    };
+    const val = providerSelect.value;
+    console.log("Switching provider to:", val); // Cek di console F12
 
-    try {
-        const res = await apiCall('saveSystemSettings', payload);
-        if (res.success) {
-            window.showToast("Konfigurasi sistem berhasil disimpan!", "success");
-            window.appState.systemSettings = payload; 
-        } else {
-            window.showToast(res.error || "Gagal menyimpan", "error");
-        }
-    } catch (e) {
-        window.showToast("Terjadi kesalahan koneksi", "error");
-        console.error(e);
-    } finally {
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = 'SIMPAN KONFIGURASI SISTEM';
-        }
+    // 1. Sembunyikan SEMUA form email dulu
+    document.querySelectorAll('.email-config-form').forEach(el => {
+        el.classList.add('hidden');
+    });
+
+    // 2. Munculkan form yang ID-nya pas (Contoh: form-KIRIMEMAIL)
+    const targetForm = document.getElementById('form-' + val);
+    if (targetForm) {
+        targetForm.classList.remove('hidden');
+        console.log("Form visible:", 'form-' + val);
+    } else {
+        console.warn("Form tidak ditemukan untuk ID:", 'form-' + val);
     }
 };
+    window.saveSystemSettings = async () => {
+        const btn = document.getElementById('btnSaveSys'); 
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="ph ph-circle-notch animate-spin"></i> Saving...'; }
+
+        const provider = document.getElementById('sysEmailProvider')?.value || 'NONE';
+        const payload = {
+            KODE_UNIK_MODE: document.getElementById('sysUniqueMode')?.value,
+            KODE_UNIK_MAX: document.getElementById('sysUniqueMax')?.value,
+            AFFILIATE_LOCK: document.getElementById('sysAffLock')?.value,
+            AFFILIATE_COOKIE_DURATION: document.getElementById('sysCookieDays')?.value,
+            emailProvider: provider,
+            MAILKETING_STATUS: provider === 'MAILKETING' ? 'ON' : 'OFF',
+            JOWMAIL_STATUS: provider === 'JOWMAIL' ? 'ON' : 'OFF',
+            KIRIMEMAIL_STATUS: provider === 'KIRIMEMAIL' ? 'ON' : 'OFF',
+            SMTP_STATUS: provider === 'SMTP' ? 'ON' : 'OFF',
+            MAILKETING_TOKEN: document.getElementById('MAILKETING_TOKEN')?.value || '',
+            MAILKETING_FROM_EMAIL: document.getElementById('MAILKETING_FROM_EMAIL')?.value || '',
+            MAILKETING_FROM_NAME: document.getElementById('MAILKETING_FROM_NAME')?.value || '',
+            JOWMAIL_TOKEN: document.getElementById('JOWMAIL_TOKEN')?.value || '',
+            JOWMAIL_LIST_ID: document.getElementById('JOWMAIL_LIST_ID')?.value || '',
+            KIRIMEMAIL_AUTH_ID: document.getElementById('KIRIMEMAIL_AUTH_ID')?.value || '',
+            KIRIMEMAIL_AUTH_TOKEN: document.getElementById('KIRIMEMAIL_AUTH_TOKEN')?.value || '',
+            KIRIMEMAIL_LIST_ID: document.getElementById('KIRIMEMAIL_LIST_ID')?.value || '',
+            KIRIMEMAIL_SENDER: document.getElementById('KIRIMEMAIL_SENDER')?.value || '',
+            SMTP_HOST: document.getElementById('SMTP_HOST')?.value || '',
+            SMTP_PORT: document.getElementById('SMTP_PORT')?.value || '',
+            SMTP_USER: document.getElementById('SMTP_USER')?.value || '',
+            SMTP_PASS: document.getElementById('SMTP_PASS')?.value || '',
+            QRIS_IMAGE_URL: document.getElementById('sysQrisUrl')?.value || '',
+            AFTER_CHECKOUT_BTN_TEXT: document.getElementById('sysAfterBtnText')?.value || '',
+            AFTER_CHECKOUT_BTN_URL: document.getElementById('sysAfterBtnUrl')?.value || ''
+        };
+
+        try {
+            const res = await apiCall('saveSystemSettings', payload);
+            if (res.success) {
+                window.showToast("Berhasil disimpan!", "success");
+                window.appState.systemSettings = payload; 
+            }
+        } catch (e) {
+            window.showToast("Gagal simpan", "error");
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = 'SIMPAN KONFIGURASI SISTEM'; }
+        }
+    };
     // -----------------------------------------------------
 
     window.applyLogo = (src) => { 
         const l=document.getElementById('appLogoSidebar'); 
         if(src){ if(l){l.src=src;l.classList.remove('hidden');} } else { if(l){l.src='';l.classList.add('hidden');} } 
     };
+
+    // --- FUNGSI TES EMAIL GLOBAL ---
+window.testEmailConfig = async () => {
+    const provider = document.getElementById('sysEmailProvider').value;
+    
+    if (provider === 'NONE') {
+        return window.showToast("Pilih provider dulu, Bos!", "error");
+    }
+
+    const targetEmail = prompt("Kirim email tes ke mana?");
+    if (!targetEmail) return;
+
+    window.showToast("Sedang mengetes " + provider + "...");
+
+    // PAYLOAD LENGKAP: Mailketing, Jowmail & Kirim.Email
+    const payload = {
+        action: 'testThirdParty',
+        provider: provider.toLowerCase(),
+        test_email: targetEmail,
+        
+        // Logika ambil Token & ID secara dinamis
+        token: (provider === 'KIRIMEMAIL') 
+            ? document.getElementById('KIRIMEMAIL_AUTH_TOKEN')?.value 
+            : document.getElementById(provider + '_TOKEN')?.value || "",
+               
+        auth_id: document.getElementById('KIRIMEMAIL_AUTH_ID')?.value || "",
+        
+        list_id: (provider === 'KIRIMEMAIL')
+            ? document.getElementById('KIRIMEMAIL_LIST_ID')?.value
+            : document.getElementById(provider + '_LIST_ID')?.value || "",
+        
+        // Data Khusus Mailketing
+        from_email: document.getElementById('MAILKETING_FROM_EMAIL')?.value || "",
+        from_name: document.getElementById('MAILKETING_FROM_NAME')?.value || "Admin",
+        
+        // Data Khusus Kirim.Email
+        sender_email: document.getElementById('KIRIMEMAIL_SENDER')?.value || "",
+        
+        // Data Khusus SMTP
+        host: document.getElementById('SMTP_HOST')?.value || "",
+        port: document.getElementById('SMTP_PORT')?.value || "",
+        user: document.getElementById('SMTP_USER')?.value || "",
+        pass: document.getElementById('SMTP_PASS')?.value || ""
+    };
+
+    try {
+        const res = await apiCall('testThirdParty', payload);
+        if (res.success) {
+            window.showToast(res.message, "success");
+        } else {
+            window.showToast(res.message, "error");
+        }
+    } catch (err) {
+        window.showToast("Koneksi gagal: " + err.message, "error");
+    }
+};
 
     window.initChart = () => {
         setTimeout(() => {
